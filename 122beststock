@@ -1,0 +1,20 @@
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        start=prices[0]
+        profit=0
+        i=1
+        n=len(prices)
+        while(i<n):
+            if prices[i]<start:
+                start=prices[i]
+                i=i+1
+            else:
+                profit+=prices[i]-start
+                start=prices[i]
+                i=i+1
+        return profit
+#we find the local maximum i.e each time a stock prices increases. 
+# then the next time it decreases, we just find the price and add it to the profit.
+#the main idea to remember in this problem is that we cant hold more than one stock so it can be one after the other.
+
+       
