@@ -1,0 +1,17 @@
+class Solution:
+    def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        n=len(nums)
+        count=0
+        hm={0:1}
+        s=0
+        for i in nums:
+            s+=i
+            remain=s%k
+            if remain in hm:
+                count+=hm[remain]
+                hm[remain]+=1
+            else:
+                hm[remain]=1
+        return count
+    ##using hash map, we keep a track of all the remainders possible
+    ##in this way the time complexity reduces to n as we are not making any sub arrays we are just couting the number of subarrays possible
