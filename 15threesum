@@ -1,0 +1,28 @@
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res=[]
+        nums.sort()
+        n=len(nums)
+        for i,a in enumerate(nums):
+            if i>0 and a==nums[i-1]:
+                continue
+            l=i+1
+            r=n-1
+            while(l<r):
+                ts=a+nums[l]+nums[r]
+                if ts>0:
+                    r-=1
+                elif ts<0:
+                    l+=1
+                else:
+                    res.append([a,nums[l],nums[r]])
+                    l+=1
+                    while nums[l]==nums[l-1] and l<r:
+                        l+=1
+        return res
+## we first sort the array and then take the first element
+## to make sure an element is not checked again, we set the first condition and since its sorted, we wont check for the same again 
+## then as we have one element already, to find the other two, we set a left and a right pointer.
+## we find the sum of all three. if the sum is less than zero, then we increase the left pointer as we know the array is sorted and increases when we go from left to right
+## similarly if sum>0 then we need to decrease the sum hence lower the right pointer by one
+## if the sum is zero, then we add the numbers to the result and move the left pointer as that automatically takes care of the right one too
