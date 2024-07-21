@@ -1,0 +1,20 @@
+class Solution:
+    def maxScore(self, cardPoints: List[int], k: int) -> int:
+        n=len(cardPoints)
+        if k==n:
+            return sum(cardPoints)
+        else:
+           r=n-k
+           l=0
+           curr=sum(cardPoints[n-k:])
+           sums=curr
+           while(k>0):
+            sums+=cardPoints[l]-cardPoints[r]
+            if sums>curr:
+                curr=sums
+            k=k-1
+            l=l+1
+            r=r+1
+        if sum(cardPoints[n-og:])>curr:
+            curr=sum(cardPoints[n-og:])
+        return curr
