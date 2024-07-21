@@ -1,0 +1,16 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        n=len(nums)
+        hm={0:1}
+        sums=0
+        res=0
+        for i in nums:
+            sums+=i
+            if sums-k in hm:
+                res+=hm[sums-k]
+            if sums in hm:
+                hm[sums]+=1
+            else:
+                hm[sums]=1
+        return res
+        
