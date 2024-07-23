@@ -1,0 +1,31 @@
+class Solution:
+    def gameOfLife(self, board: List[List[int]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        m=len(board)
+        n=len(board[0])
+        neighbours=[(-1,-1),(-1,0),(-1,1),(0,-1),(0,1),(1,-1),(1,0),(1,1)]
+        for i in range(m):
+            for j in range(n):
+                ones=0
+                for u,v in neighbours:
+                    if (i+u>=0 and i+u<len(board)) and (j+v>=0 and j+v<len(board[0])) and abs(board[i+u][j+v])==1:
+                        ones+=1
+                if board[i][j]==1 and (ones<2 or ones>3):
+                    board[i][j]=-1
+                if board[i][j]==0 and ones==3:
+                    board[i][j]=2
+        for i in range(m):
+            for j in range(n):
+                if board[i][j]>0:
+                    board[i][j]=1
+                else:
+                    board[i][j]=0
+
+                    
+  ## here, we count the number of neighbours and if they are live(1) then only we consider it
+  ## to count this, we set the directions in which a point can have neighbours
+  ## those are upper left(-1,-1) up(-1,0) upper right(-1,1), to the left (0,-1), to the right (0,1), lower left(1,-1), below(1,0) and lower right(1,1)
+  ## given the conditions, if the value changes from 1 to 0, we set it to -1 
+  ## if the value changed from 0 to 1, we set it to 2
