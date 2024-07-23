@@ -1,0 +1,30 @@
+#User function Template for python3
+
+class Solution:
+    def uniquePerms(self, arr, n):
+        # code here 
+        res=[]
+        perm=[]
+        count={n:0 for n in arr}
+        for n in arr:
+            count[n]+=1
+        def dfs():
+            if len(perm)==len(arr):
+                res.append(perm.copy())
+                return
+            for i in sorted(count.keys()):
+                if count[i]>0:
+                    perm.append(i)
+                    count[i]-=1
+                    dfs()
+                    count[i]+=1
+                    perm.pop()
+        dfs()
+        return res
+
+## the res stores the final results
+## the perm stores the current permutation
+## we store count of elements so as to avoid repetation and have unique permutations 
+## also we sort the elements so that when the final permuation is built, it is sorted how asked in question
+## we do dfs by adding one element at a time, and when we find a permutation, we add its copy because if we directly add the permuation to the result, whenever we make modifications to permutation in the next iteration, it will also change in the result
+## in this way only unique permutations are found
