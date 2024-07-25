@@ -1,0 +1,25 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack=[]
+        print(s)
+        for i in s:
+            if (i==")"):
+                if stack and stack[0]=="(":
+                    stack.pop(0)
+                else:
+                    return False
+            elif i=="}":
+                if stack and stack[0]=="{":
+                    stack.pop(0)
+                else:
+                    return False
+            elif i=="]":
+                if stack and stack[0]=="[":
+                    stack.pop(0)
+                else:
+                    return False
+            elif i in "({[":
+                stack.insert(0,i)
+        return True if not stack else False
+            
+                
