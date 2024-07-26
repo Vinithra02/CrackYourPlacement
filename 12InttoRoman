@@ -1,0 +1,46 @@
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        conver={1:"I",5:"V",10:"X",50:"L",100:"C",500:"D",1000:"M"}
+        digits=[]
+        for i in str(num):
+            digits.append(int(i))
+        j=len(digits)-1
+        roman=""
+        for i in digits:
+            if (i==4 or i==9) :
+                roman+=conver[math.pow(10,j)]
+                roman+=conver[(i+1)*math.pow(10,j)]
+            else:
+                num=i*(math.pow(10,j))
+                if num in conver.keys():
+                    roman+=conver[num]
+                else:
+                    if j==3:
+                        roman+="M"*i
+                    else:
+                        if j==2:
+                            if num>500:
+                                roman+="D"
+                                roman+="C"*int((num-500)/100)
+                            else:
+                                roman+="C"*int(num/100)
+                        elif j==1:
+                            if num>50:
+                                roman+="L"
+                                roman+="X"*int((num-50)/10)
+                            else:
+                                roman+="X"*int(num/10)
+                        else:
+                            if num>5:
+                                roman+='V'
+                                roman+="I"*int((num-5))
+                            else:
+                                roman+="I"*int(num)
+
+
+
+            j-=1
+        print(roman)
+        return roman
+
+        
